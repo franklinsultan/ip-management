@@ -1,7 +1,15 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000/api';
-
 export function register(user) {
-    return axios.post(`${API_URL}/register`, user);
+    return axios.post('/api/register', user);
+}
+
+export function login(user) {
+    return axios.post('/api/login', user)
+        .then(response => {
+            if (response.data.token) {
+                localStorage.setItem('user-token', response.data.token);
+            }
+            return response.data;
+        });
 }

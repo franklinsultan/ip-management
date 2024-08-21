@@ -23,7 +23,6 @@
     </head>
     <body>
         <div id="app">
-            <register></register>
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
