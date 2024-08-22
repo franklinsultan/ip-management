@@ -13,6 +13,15 @@ class IpAddressController extends Controller
         return IpAddress::all();
     }
 
+    public function show($id)
+    {
+        $findIpAddress = IpAddress::findOrFail($id);
+
+        return response()->json([
+            'data' => $findIpAddress
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -37,13 +46,13 @@ class IpAddressController extends Controller
             'label' => 'nullable|string|max:255',
         ]);
 
-        $FindIpAddress = IpAddress::findOrFail($id);
-        $FindIpAddress->label = $request->label;
-        $FindIpAddress->save();
+        $findIpAddress = IpAddress::findOrFail($id);
+        $findIpAddress->label = $request->label;
+        $findIpAddress->save();
 
         return response()->json([
             'message' => 'IP address label successfully updated',
-            'data' => $FindIpAddress
+            'data' => $findIpAddress
         ]);
     }
 }

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { register } from '../auth/index';
+import { register } from '../includes/index';
 
 export default {
     data() {

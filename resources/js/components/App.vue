@@ -7,16 +7,19 @@
       <router-view></router-view>
 
       <AddIpAddress />
+      <IpAddressList />
     </div>
   </template>
   
   <script>
  import AddIpAddress from './AddIpAddress.vue';
+ import IpAddressList from './IpAddressList.vue';
 
   export default {
     name: 'App',
     components: {
-        AddIpAddress
+        AddIpAddress,
+        IpAddressList
     }
   };
   </script>

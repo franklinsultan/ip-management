@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { login } from '../auth/index';
+import { login } from '../includes/index';
 
 export default {
     data() {

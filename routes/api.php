@@ -16,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
-Route::middleware('auth:api')->post('ip-addresses', 'IpAddressController@store');
-Route::middleware('auth:api')->put('ip-addresses/{id}',  'IpAddressControlle@update');
+Route::middleware('auth:api')->group(function () {
+    Route::get('ip-addresses', 'IpAddressController@index');
+    Route::post('ip-addresses', 'IpAddressController@store');
+    Route::get('ip-addresses/{id}',  'IpAddressController@show');
+    Route::put('ip-addresses/{id}',  'IpAddressController@update');
+});

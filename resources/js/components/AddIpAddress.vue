@@ -16,7 +16,7 @@
   </template>
   
   <script>
-  import { addIpAddress } from '../auth/index';
+  import { addIpAddress } from '../includes/index';
 
   export default {
     data() {
@@ -30,7 +30,6 @@
     methods: {
       add() {
         addIpAddress(this.ipAddress).then(response => {
-          console.log(response);
           alert('IP address added successfully');
           this.ipAddress.ip_address = '';
           this.ipAddress.label = '';
