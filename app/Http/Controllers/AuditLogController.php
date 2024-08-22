@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\AuditLog;
 
 
 class AuditLogController extends Controller
 {
     public function index()
     {
-        $userLogs = User::with('auditLogs')->findOrFail(auth()->id());
+        $logs = AuditLog::with('user')->get();
 
-        return response()->json($userLogs);
+        return response()->json($logs);
     }
 }

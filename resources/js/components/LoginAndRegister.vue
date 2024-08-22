@@ -24,6 +24,7 @@
             <a @click="toggleForm" class="toggle">
                 {{ isLogin ? "No account? Register" : 'Already have an account? Login' }}
             </a>
+            <div v-if="error" class="error-message">{{ error }}</div>
         </div>
     </div>
   </template>
@@ -34,7 +35,8 @@ import { login, register } from '../includes/index';
   export default {
     data() {
       return {
-        isLogin: true, 
+        isLogin: true,
+        error: '',
         user: {
                 name: '',
                 email: '',
@@ -47,13 +49,14 @@ import { login, register } from '../includes/index';
             login(this.user).then(res => {
                 this.$router.push('/ip-addresses');
             }).catch(error => {
-                console.error(error);
+               this.error = error;
             });
         },
         register() {
             register(this.user).then(res => {
                 this.isLogin = true;
             }).catch(error => {
+              this.error = error;
                 console.error(error);
             });
         },
@@ -62,6 +65,7 @@ import { login, register } from '../includes/index';
             this.user.name = '';
             this.user.email = '';
             this.user.password = '';
+            this.error = '';
       }
     },
   };
@@ -126,6 +130,9 @@ import { login, register } from '../includes/index';
     color: #007bff;
     cursor: pointer;
     text-decoration: underline;
+  }
+  .error-message {
+    color: red;
   }
   </style>
   

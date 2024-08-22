@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user', 'token'));
+        return response()->json(compact('user', 'token'), 201);
     }
 
     public function login(Request $request)
@@ -37,12 +37,12 @@ class AuthController extends Controller
             $token = JWTAuth::attempt($credentials);
 
             if(! $token) {
-                return response()->json(['error' => 'wrong credentials']);
+                return response()->json(['error' => 'wrong credentials'], 401);
             }
 
             return response()->json(compact('token'));
         } catch (JWTException $e) {
-            return response()->json(['error' => 'something went wrong']);
+            return response()->json(['error' => 'something went wrong'], 500);
         }
     }
 }

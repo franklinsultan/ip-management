@@ -1,9 +1,8 @@
 <template>
     <div>
-      <h2>Add IP Address</h2>
-      <form @submit.prevent="add">
+      <form @submit.prevent="add" class="input-row">
         <div>
-          <label for="ip_address">IP Address:</label>
+          <label for="ip_address">Ip Address:</label>
           <input v-model="ipAddress.ip_address" type="text" id="ip_address" required>
         </div>
         <div>
@@ -40,4 +39,32 @@
     }
   }
   </script>
+  <style scoped>
+    .input-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    input {
+      flex: 1; /* Make each input take equal width */
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      padding: 8px 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  
   

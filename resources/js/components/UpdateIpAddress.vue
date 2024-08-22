@@ -3,7 +3,7 @@
       <h2>Update IP Address Label</h2>
       <form @submit.prevent="update">
         <div>
-          <label for="ip_address">IP Address:</label>
+          <label for="ip_address">Ip Address:</label>
           <input v-model="ipAddress.ip_address" type="text" id="ip_address" disabled>
         </div>
         <div>
