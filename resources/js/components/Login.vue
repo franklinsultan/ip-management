@@ -24,8 +24,7 @@ export default {
     methods: {
         login() {
             login(this.user).then(response => {
-                console.log(response.data);
-                this.$router.push('/register');
+                this.$router.push('/ip-addresses');
             }).catch(error => {
                 console.error(error);
             });

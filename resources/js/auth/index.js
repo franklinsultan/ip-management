@@ -13,3 +13,19 @@ export function login(user) {
             return response.data;
         });
 }
+
+function getToken() {
+    let token = localStorage.getItem('user-token');
+    
+    if (! token) {
+        return {};
+    }
+
+    return { Authorization: 'Bearer ' + token };
+} 
+
+export function addIpAddress(data) {
+    return axios.post('/api/ip-addresses', data, {
+        headers: getToken()
+    });
+}
