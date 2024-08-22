@@ -47,3 +47,9 @@ export function updateIpAddress(ipAddressId, label) {
         headers: getToken()
     });
 }
+
+export function getAuditLogs() {
+    return axios.get('/api/audit-logs', {
+        headers: getToken()
+    });
+}

@@ -21,4 +21,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('ip-addresses', 'IpAddressController@store');
     Route::get('ip-addresses/{id}',  'IpAddressController@show');
     Route::put('ip-addresses/{id}',  'IpAddressController@update');
+    Route::get('audit-logs', 'AuditLogController@index');
 });

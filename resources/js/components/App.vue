@@ -8,18 +8,21 @@
 
       <AddIpAddress />
       <IpAddressList />
+      <AuditLog />
     </div>
   </template>
   
   <script>
  import AddIpAddress from './AddIpAddress.vue';
  import IpAddressList from './IpAddressList.vue';
+ import AuditLog from './AuditLog.vue';
 
   export default {
     name: 'App',
     components: {
         AddIpAddress,
-        IpAddressList
+        IpAddressList,
+        AuditLog
     }
   };
   </script>

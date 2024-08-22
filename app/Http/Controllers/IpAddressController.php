@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\IpAddress;
+use App\AuditLog;
+use Illuminate\Support\Facades\Auth;
 
 class IpAddressController extends Controller
 {
@@ -34,6 +36,11 @@ class IpAddressController extends Controller
             'label' => $request->label,
         ]);
 
+        AuditLog::create([
+            'details' => "Added IP: {$ipAddress->ip_address}, label: {$ipAddress->label}",
+            'user_id' => Auth::id(),
+        ]);
+
         return response()->json([
             'message' => 'IP address added successfully',
             'data' => $ipAddress
@@ -47,8 +54,14 @@ class IpAddressController extends Controller
         ]);
 
         $findIpAddress = IpAddress::findOrFail($id);
+        $oldLabel = $findIpAddress->label;
         $findIpAddress->label = $request->label;
         $findIpAddress->save();
+
+        AuditLog::create([
+            'details' => "Updated label for: {$findIpAddress->ip_address}, from {$oldLabel} to {$findIpAddress->label}",
+            'user_id' => Auth::id()
+        ]);
 
         return response()->json([
             'message' => 'IP address label successfully updated',
