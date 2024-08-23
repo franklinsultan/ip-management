@@ -15,7 +15,12 @@
               <input v-model="ipAddress.label" type="text" id="label">
             </div>
             <button type="submit">Add IP Address</button>
-          </form>    
+          </form>
+          <div v-if="error" class="error-message">
+            <p v-for="item in error">
+              {{ item }}
+            </p>
+          </div>    
         </div>
       </div>
 
@@ -28,9 +33,10 @@
   export default {
     data() {
       return {
+        error: '',
         ipAddress: {
           ip_address: '',
-          label: ''
+          label: '',
         }
       };
     },
@@ -40,8 +46,9 @@
           this.$emit('ipAdded', response.data.data);
           this.ipAddress.ip_address = '';
           this.ipAddress.label = '';
+          this.error = '';
         }).catch(error => {
-            console.error('Error adding IP address:', error);
+          this.error = error.response.data.errors;
         });
       },
       navigateTo(page) {
@@ -82,6 +89,9 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+    }
+    .error-message {
+      color: red;
     }
   </style>
   

@@ -24,7 +24,11 @@
             <a @click="toggleForm" class="toggle">
                 {{ isLogin ? "No account? Register" : 'Already have an account? Login' }}
             </a>
-            <div v-if="error" class="error-message">{{ error }}</div>
+            <div v-if="error" class="error-message">
+              <p v-for="item in error">
+                {{ item }}
+              </p>
+            </div>
         </div>
     </div>
   </template>
@@ -47,7 +51,11 @@ import { login, register } from '../includes/index';
     methods: {
         login() {
             login(this.user).then(res => {
-                this.$router.push({ name: 'dashboard'});
+                if (res.error) {
+                  this.error = res.error;
+                } else {
+                  this.$router.push({ name: 'dashboard'});
+                }
             }).catch(error => {
                this.error = error;
             });
@@ -56,8 +64,7 @@ import { login, register } from '../includes/index';
             register(this.user).then(res => {
                 this.isLogin = true;
             }).catch(error => {
-              this.error = error;
-                console.error(error);
+              this.error = error.response.data.errors;
             });
         },
         toggleForm() {

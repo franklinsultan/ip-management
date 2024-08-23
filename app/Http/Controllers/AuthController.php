@@ -13,21 +13,27 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('user', 'token'), 201);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+    
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+    
+            $token = JWTAuth::fromUser($user);
+    
+            return response()->json(compact('user', 'token'), 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors()
+            ], 422);
+        }
     }
 
     public function login(Request $request)
@@ -37,7 +43,7 @@ class AuthController extends Controller
             $token = JWTAuth::attempt($credentials);
 
             if(! $token) {
-                return response()->json(['error' => 'wrong credentials'], 401);
+                return response()->json(['error' => 'Invalid credentials provided.']);
             }
 
             return response()->json(compact('token'));

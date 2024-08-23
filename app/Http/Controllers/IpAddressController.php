@@ -26,25 +26,31 @@ class IpAddressController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'ip_address' => 'required|ip|unique:ip_addresses,ip_address',
-            'label' => 'nullable|string|max:255',
-        ]);
-
-        $ipAddress = IpAddress::create([
-            'ip_address' => $request->ip_address,
-            'label' => $request->label,
-        ]);
-
-        AuditLog::create([
-            'details' => "Added IP: {$ipAddress->ip_address}, label: {$ipAddress->label}",
-            'user_id' => Auth::id(),
-        ]);
-
-        return response()->json([
-            'message' => 'IP address added successfully',
-            'data' => $ipAddress
-        ]);
+        try {
+            $request->validate([
+                'ip_address' => 'required|ip|unique:ip_addresses,ip_address',
+                'label' => 'nullable|string|max:255',
+            ]);
+    
+            $ipAddress = IpAddress::create([
+                'ip_address' => $request->ip_address,
+                'label' => $request->label,
+            ]);
+    
+            AuditLog::create([
+                'details' => "Added IP: {$ipAddress->ip_address}, label: {$ipAddress->label}",
+                'user_id' => Auth::id(),
+            ]);
+    
+            return response()->json([
+                'message' => 'IP address added successfully',
+                'data' => $ipAddress
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors()
+            ], 422);
+        }
     }
 
     public function update(Request $request, $id)
