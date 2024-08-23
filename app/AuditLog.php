@@ -12,4 +12,9 @@ class AuditLog extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('F d, Y h:i A');
+    }
 }

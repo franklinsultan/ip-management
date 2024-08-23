@@ -12,7 +12,7 @@ class IpAddressController extends Controller
 
     public function index()
     {
-        return IpAddress::all();
+        return IpAddress::orderBy('created_at', 'desc')->get();
     }
 
     public function show($id)

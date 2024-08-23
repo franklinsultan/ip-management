@@ -11,7 +11,7 @@ class AuditLogController extends Controller
 {
     public function index()
     {
-        $logs = AuditLog::with('user')->get();
+        $logs = AuditLog::with('user')->orderBy('created_at', 'desc')->get();
 
         return response()->json($logs);
     }
