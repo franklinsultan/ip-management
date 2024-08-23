@@ -47,7 +47,7 @@ import { login, register } from '../includes/index';
     methods: {
         login() {
             login(this.user).then(res => {
-                this.$router.push('/ip-addresses');
+                this.$router.push({ name: 'dashboard'});
             }).catch(error => {
                this.error = error;
             });
