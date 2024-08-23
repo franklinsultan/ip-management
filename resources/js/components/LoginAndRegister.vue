@@ -25,9 +25,7 @@
                 {{ isLogin ? "No account? Register" : 'Already have an account? Login' }}
             </a>
             <div v-if="error" class="error-message">
-              <p v-for="item in error">
-                {{ item }}
-              </p>
+              {{ error }}
             </div>
         </div>
     </div>
@@ -79,67 +77,67 @@ import { login, register } from '../includes/index';
   </script>
   
   <style scoped>
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-  }
-  
-  .card {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  h2 {
-    margin-bottom: 1.5rem;
-  }
-  
-  .input-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  input {
-    width: 93%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #2f5d8e;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .toggle{
-    margin-top: 1rem;
-    color: #007bff;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  .error-message {
-    color: red;
-  }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+    
+    .card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+    
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    input {
+      width: 93%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #2f5d8e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    .toggle{
+      margin-top: 1rem;
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .error-message {
+      color: red;
+    }
   </style>
   

@@ -36,12 +36,6 @@ export function fetchAddresses() {
     });
 }
 
-// export function getIpAddress(ipAddressId) {
-//     return axios.get(`/api/ip-addresses/${ipAddressId}`, {
-//         headers: getToken()
-//     });
-// }
-
 export function updateIpAddress(ipAddressId, label) {
     return axios.put(`/api/ip-addresses/${ipAddressId}`, { label }, {
         headers: getToken()
@@ -52,10 +46,4 @@ export function getAuditLogs() {
     return axios.get('/api/audit-logs', {
         headers: getToken()
     });
-}
-
-export function logout() {
-    return axios.post('/api/logout',{
-        headers: getToken()
-    } );
 }

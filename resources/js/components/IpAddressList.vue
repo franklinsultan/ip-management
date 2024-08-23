@@ -74,7 +74,6 @@
               return item;
         });
         this.ipAddresses = newArr;
-        this.$refs.log.getAuditLogs(); //update the audit logs
       },
       closelModal() {
         this.showModal = false;

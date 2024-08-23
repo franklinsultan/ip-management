@@ -65,7 +65,7 @@
     }
     
     input {
-      flex: 1; /* Make each input take equal width */
+      flex: 1;
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
