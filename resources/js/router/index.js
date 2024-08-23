@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Login from '../components/LoginAndRegister.vue';
 import Dashboard from "../components/AdminDashboard.vue";
 import LandingPage from "../components/LandingPage.vue";
+import AuditLogs from "../components/AuditLog.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,12 @@ const router = new Router({
             name: 'dashboard',
             component: Dashboard,
             meta: { requiresAuth: true },
+        },
+        {
+          path: '/logs',
+          name: 'audtlogs',
+          component: AuditLogs,
+          meta: { requiresAuth: true },
         },
         {
             path: '*',

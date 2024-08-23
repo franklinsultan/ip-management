@@ -1,16 +1,24 @@
 <template>
     <div>
-      <form @submit.prevent="add" class="input-row">
+      <div class="list-title">
+        <h2>List of IP Addresses
+          <button @click="navigateTo('audtlogs')">View Logs</button>
+        </h2>
         <div>
-          <label for="ip_address">Ip Address:</label>
-          <input v-model="ipAddress.ip_address" type="text" id="ip_address" required>
+          <form @submit.prevent="add" class="input-row">
+            <div>
+              <label for="ip_address">Ip Address:</label>
+              <input v-model="ipAddress.ip_address" type="text" id="ip_address" required>
+            </div>
+            <div>
+              <label for="label">Label:</label>
+              <input v-model="ipAddress.label" type="text" id="label">
+            </div>
+            <button type="submit">Add IP Address</button>
+          </form>    
         </div>
-        <div>
-          <label for="label">Label:</label>
-          <input v-model="ipAddress.label" type="text" id="label">
-        </div>
-        <button type="submit">Add IP Address</button>
-      </form>
+      </div>
+
     </div>
   </template>
   
@@ -29,12 +37,15 @@
     methods: {
       add() {
         addIpAddress(this.ipAddress).then(response => {
-          alert('IP address added successfully');
+          this.$emit('ipAdded', response.data.data);
           this.ipAddress.ip_address = '';
           this.ipAddress.label = '';
         }).catch(error => {
             console.error('Error adding IP address:', error);
         });
+      },
+      navigateTo(page) {
+        this.$router.push({ name: page });
       }
     }
   }
@@ -64,6 +75,13 @@
     
     button:hover {
       background-color: #0056b3;
+    }
+
+    .list-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
   </style>
   

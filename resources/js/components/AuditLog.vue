@@ -1,6 +1,13 @@
 <template>
-    <div>
-      <h2>Audit Trail</h2>
+  <div class="app">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+    </div>
+    <div class="main-content">
+      <header class="header">
+        <button @click="goBack">Go Back</button>
+        <h1>Audit Trail</h1>
+      </header>
       <table>
         <thead>
           <tr>
@@ -20,7 +27,9 @@
         </tbody>
       </table>
     </div>
-  </template>
+    <router-view></router-view>
+  </div>
+</template>
   
   <script>
   import { getAuditLogs } from '../includes/index';
@@ -38,7 +47,10 @@
         }).catch(error => {
           console.error('Error fetching audit logs:', error);
         });
-      }
+      },
+      goBack() {
+        this.$router.go(-1);
+      },
     },
     mounted() {
       this.getAuditLogs();

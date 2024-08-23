@@ -48,8 +48,8 @@
     methods: {
       update() {
         updateIpAddress(this.ipAddress.id, this.label).then(response => {
+          this.$emit('updateLabel', response.data.data);
           this.closeModal();
-          alert('IP address label updated successfully');
         }).catch(error => {
           console.error('Error updating IP address label:', error);
         });

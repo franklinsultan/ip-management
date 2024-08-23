@@ -1,7 +1,7 @@
 <template>
     <div class="landing-page">
       <header>
-        <h3>Welcome to</h3>
+        <h2>Welcome to</h2>
         <h1>IP Address Management</h1>
         <button @click="navigateTo('login')">Login</button>
       </header>

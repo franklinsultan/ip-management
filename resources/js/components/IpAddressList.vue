@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>List of IP Addresses</h2>
     <table>
       <thead>
         <tr>
@@ -17,7 +16,8 @@
           <td>{{ item.ip_address }}</td>
           <td>{{ item.label }}</td>
           <td>{{ item.created_at }}</td>
-          <button @click="EditIp(item)">Edit</button>
+          <td><button @click="EditIp(item)">Edit</button></td>
+
         </tr>
       </tbody>
     </table>
@@ -26,6 +26,7 @@
       :show="showModal"
       :ipAddress="ipAddress"
       @close="closelModal"
+      @updateLabel="updateIpAddressLabel" 
     />
   </div>
 </template>
@@ -33,6 +34,7 @@
 <script>
   import { fetchAddresses } from '../includes/index';
   import EditLabelModal from './EditLabelModal.vue';
+  import AuditLog from './AuditLog.vue';
 
   export default {
     data() {
@@ -43,7 +45,8 @@
       };
     },
     components: {
-      EditLabelModal
+      EditLabelModal,
+      AuditLog,
   },
     methods: {
       fetchAddresses() {
@@ -56,7 +59,22 @@
       EditIp(ipAddress) {
         this.showModal = true;
         this.ipAddress = ipAddress;
-        // this.$router.push({ name: 'EditLabelModal', params: { id: id } });
+      },
+      updateIpAddressList(newIp) {
+        this.ipAddresses.push(newIp);
+      },
+      updateIpAddressLabel(updatedIp) {
+        const newArr = this.ipAddresses.map(item => {
+              if (item.id === updatedIp.id) {
+                return {
+                  ...item,
+                  label: updatedIp.label
+                }
+              }
+              return item;
+        });
+        this.ipAddresses = newArr;
+        this.$refs.log.getAuditLogs(); //update the audit logs
       },
       closelModal() {
         this.showModal = false;
@@ -93,5 +111,25 @@
 
   tr:nth-child(even) {
     background-color: #f9f9f9;
+  }
+  
+  .list-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
   }
 </style>
