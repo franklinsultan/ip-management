@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Login from '../components/LoginAndRegister.vue';
-import UpdateIpAddress from '../components/UpdateIpAddress.vue';
+import EditLabelModal from '../components/EditLabelModal.vue';
 
 Vue.use(Router);
 
@@ -13,11 +13,11 @@ export default new Router({
             name: 'login',
             component: Login
         },
-        {
-            path: '/update-ip/:id',
-            name: 'UpdateIpAddress',
-            component: UpdateIpAddress,
-            props: true
-        }
+        // {
+        //     path: '/update-ip/:id',
+        //     name: 'EditLabelModal',
+        //     component: EditLabelModal,
+        //     props: true
+        // }
     ]
 });
